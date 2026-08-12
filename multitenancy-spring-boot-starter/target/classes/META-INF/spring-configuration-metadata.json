@@ -1,0 +1,22 @@
+{
+  "groups": [
+    {
+      "name": "multitenancy",
+      "type": "com.example.multitenancy.properties.MultiTenancyProperties",
+      "sourceType": "com.example.multitenancy.properties.MultiTenancyProperties"
+    }
+  ],
+  "properties": [
+    {
+      "name": "multitenancy.enabled",
+      "type": "java.lang.Boolean",
+      "sourceType": "com.example.multitenancy.properties.MultiTenancyProperties"
+    },
+    {
+      "name": "multitenancy.tenants",
+      "type": "java.util.List<com.example.multitenancy.properties.MultiTenancyProperties$TenantConfig>",
+      "sourceType": "com.example.multitenancy.properties.MultiTenancyProperties"
+    }
+  ],
+  "hints": []
+}
