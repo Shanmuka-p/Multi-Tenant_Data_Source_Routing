@@ -10,7 +10,8 @@
     {
       "name": "multitenancy.enabled",
       "type": "java.lang.Boolean",
-      "sourceType": "com.example.multitenancy.properties.MultiTenancyProperties"
+      "sourceType": "com.example.multitenancy.properties.MultiTenancyProperties",
+      "defaultValue": true
     },
     {
       "name": "multitenancy.tenants",

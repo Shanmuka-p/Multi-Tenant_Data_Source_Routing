@@ -1,0 +1,11 @@
+com\example\multitenancy\autoconfigure\MultiTenancyAutoConfiguration$1.class
+com\example\multitenancy\properties\MultiTenancyProperties$TenantConfig.class
+com\example\multitenancy\datasource\TenantAwareRoutingDataSource.class
+META-INF\spring-configuration-metadata.json
+com\example\multitenancy\TenantContext.class
+com\example\multitenancy\interceptor\TenantInterceptor.class
+com\example\multitenancy\resolver\TenantResolver.class
+com\example\multitenancy\health\TenantDataSourcesHealthContributor.class
+com\example\multitenancy\properties\MultiTenancyProperties.class
+com\example\multitenancy\autoconfigure\MultiTenancyAutoConfiguration.class
+com\example\multitenancy\resolver\HeaderTenantResolver.class
