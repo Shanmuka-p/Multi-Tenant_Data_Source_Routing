@@ -34,6 +34,13 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
+            <!-- CVE-2026-42198: pgjdbc SCRAM authentication DoS vulnerability -->
+            <!-- CVE-2026-54291: PostgreSQL JDBC Driver channel-binding downgrade vulnerability -->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>42.7.12</version>
+            </dependency>
             <dependency>
                 <groupId>com.example</groupId>
                 <artifactId>multitenancy-spring-boot-starter</artifactId>
