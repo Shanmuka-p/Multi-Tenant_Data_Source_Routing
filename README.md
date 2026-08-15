@@ -226,6 +226,34 @@ management:
 
 ---
 
+## Postman Collection
+
+A pre-configured Postman Collection ([postman_collection.json](file:///d:/Partnr/Main/week31/Multi-Tenant_Data_Source_Routing/postman_collection.json)) is included in the project root directory for interactive testing and automated API verification.
+
+### Included Request Suites:
+1. **Actuator & Health**:
+   - `GET Tenant Data Sources Health`: Checks `/actuator/health/datasources` to confirm tenant DB connections (`tenant1`, `tenant2`, `tenant3`) are UP.
+   - `GET General Application Health`: Checks `/actuator/health`.
+2. **Tenant 1 Operations**:
+   - `POST Create User - Tenant 1`: Creates user record in `tenant1_db`.
+   - `GET List Users - Tenant 1`: Retrieves users isolated in `tenant1_db`.
+   - `GET User by ID - Tenant 1`: Retrieves single user by ID in `tenant1_db`.
+3. **Tenant 2 Operations**:
+   - `POST Create User - Tenant 2`: Creates user record in `tenant2_db`.
+   - `GET List Users - Tenant 2`: Verifies strict isolation (Tenant 1 users are not visible).
+   - `GET User by ID - Tenant 2`: Retrieves user in `tenant2_db`.
+4. **Error Handling & Interceptors**:
+   - `GET Missing X-Tenant-ID Header`: Verifies HTTP `400 Bad Request` handling when header is absent.
+   - `GET Unknown Tenant`: Verifies HTTP `404 Not Found` handling for unconfigured tenant IDs.
+
+### Quick Start with Postman:
+1. Open **Postman** and click **Import**.
+2. Select the `postman_collection.json` file from the repository root.
+3. Select **Multi-Tenant Data Source Routing API** collection and click **Run Collection**.
+4. All requests include built-in JavaScript tests (`pm.test(...)`) validating HTTP status codes and response bodies automatically!
+
+---
+
 ## API Endpoints & Verification Examples
 
 ### 1. Create User in Tenant 1 (`POST /api/users`)
@@ -434,6 +462,7 @@ SELECT * FROM users;
 | **Missing Header (400 Bad Request)** | [TenantInterceptor.java](file:///d:/Partnr/Main/week31/Multi-Tenant_Data_Source_Routing/multitenancy-spring-boot-starter/src/main/java/com/example/multitenancy/interceptor/TenantInterceptor.java) | ✅ Verified |
 | **Unknown Tenant (404 Not Found)** | [TenantInterceptor.java](file:///d:/Partnr/Main/week31/Multi-Tenant_Data_Source_Routing/multitenancy-spring-boot-starter/src/main/java/com/example/multitenancy/interceptor/TenantInterceptor.java) | ✅ Verified |
 | **Custom Health Endpoint** | [TenantDataSourcesHealthContributor.java](file:///d:/Partnr/Main/week31/Multi-Tenant_Data_Source_Routing/multitenancy-spring-boot-starter/src/main/java/com/example/multitenancy/health/TenantDataSourcesHealthContributor.java) | ✅ Verified |
+| **Postman Collection Verification** | [postman_collection.json](file:///d:/Partnr/Main/week31/Multi-Tenant_Data_Source_Routing/postman_collection.json) | ✅ Verified |
 
 ---
 
