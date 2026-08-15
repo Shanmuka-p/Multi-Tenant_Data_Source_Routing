@@ -1,5 +1,6 @@
 package com.example.demo.config;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.stereotype.Component;
@@ -14,7 +15,7 @@ public class TenantSchemaInitializer implements ApplicationRunner {
 
     private final Map<String, DataSource> tenantDataSources;
 
-    public TenantSchemaInitializer(Map<String, DataSource> tenantDataSources) {
+    public TenantSchemaInitializer(@Qualifier("tenantDataSources") Map<String, DataSource> tenantDataSources) {
         this.tenantDataSources = tenantDataSources;
     }
 

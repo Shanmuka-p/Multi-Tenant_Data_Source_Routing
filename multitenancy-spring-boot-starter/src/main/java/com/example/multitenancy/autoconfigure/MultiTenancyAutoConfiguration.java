@@ -8,6 +8,7 @@ import com.example.multitenancy.properties.MultiTenancyProperties;
 import com.example.multitenancy.resolver.HeaderTenantResolver;
 import com.example.multitenancy.resolver.TenantResolver;
 import org.springframework.beans.factory.ObjectProvider;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.actuate.health.CompositeHealthContributor;
 import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -38,7 +39,7 @@ public class MultiTenancyAutoConfiguration {
         return new HeaderTenantResolver();
     }
 
-    @Bean
+    @Bean(name = "tenantDataSources")
     public Map<String, DataSource> tenantDataSources(MultiTenancyProperties properties) {
         Map<String, DataSource> dataSources = new LinkedHashMap<>();
         for (MultiTenancyProperties.TenantConfig config : properties.getTenants()) {
@@ -56,7 +57,8 @@ public class MultiTenancyAutoConfiguration {
 
     @Bean
     @Primary
-    public DataSource dataSource(MultiTenancyProperties properties, Map<String, DataSource> tenantDataSources) {
+    public DataSource dataSource(MultiTenancyProperties properties,
+                                 @Qualifier("tenantDataSources") Map<String, DataSource> tenantDataSources) {
         TenantAwareRoutingDataSource routingDataSource = new TenantAwareRoutingDataSource();
         Map<Object, Object> targetDataSources = new HashMap<>(tenantDataSources);
         routingDataSource.setTargetDataSources(targetDataSources);
@@ -94,7 +96,7 @@ public class MultiTenancyAutoConfiguration {
     @Bean("datasources")
     @ConditionalOnClass(CompositeHealthContributor.class)
     @ConditionalOnMissingBean(name = "datasources")
-    public CompositeHealthContributor datasourcesHealthContributor(Map<String, DataSource> tenantDataSources) {
+    public CompositeHealthContributor datasourcesHealthContributor(@Qualifier("tenantDataSources") Map<String, DataSource> tenantDataSources) {
         return new TenantDataSourcesHealthContributor(tenantDataSources);
     }
 }
